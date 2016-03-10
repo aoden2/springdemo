@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan({"com.tdt.springdemo.config", "com.tdt.springdemo.controller"})
+@ComponentScan("com.tdt.springdemo")
 public class Application {
 
     public static void main(String[] args) {

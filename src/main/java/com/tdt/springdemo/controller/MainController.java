@@ -14,7 +14,7 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping("/greeting")
+    @RequestMapping("/")
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name,
                            Model model) {
         model.addAttribute("name", name);

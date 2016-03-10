@@ -23,9 +23,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Logger LOGGER = Logger.getLogger(SpringSecurityConfig.class);
 
     @Autowired
-    DataSource dataSource;
-
-    @Autowired
     org.springframework.security.core.userdetails.UserDetailsService userDetailsService;
 
     @Override
