@@ -35,11 +35,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
         http
-                .authorizeRequests().antMatchers("**/")
-                .authenticated()
-                .and()
                 .authorizeRequests()
-                .antMatchers("**/resources").permitAll()
+                .antMatchers("/**")
+                .authenticated()
+                .antMatchers("/resources/aa.html").permitAll() //allow static resources
                 .and()
                 .userDetailsService(userDetailsService)
                 .formLogin()

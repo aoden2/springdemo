@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
+    @RequestMapping(value = "/aaa")
+    public String aaa() {
+
+        return "aaa";
+    }
+
     @RequestMapping(value = "/login")
     public String login() {
 
