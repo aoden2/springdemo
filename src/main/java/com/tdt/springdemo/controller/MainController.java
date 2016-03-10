@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = "/aaa")
+    @RequestMapping(value = "/profile")
     public String aaa() {
 
-        return "aaa";
+        return "profile";
     }
 
     @RequestMapping(value = "/login")
