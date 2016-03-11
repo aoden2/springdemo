@@ -42,7 +42,7 @@ public class MainController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signup() {
-        return "forgot";
+        return "signup";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
