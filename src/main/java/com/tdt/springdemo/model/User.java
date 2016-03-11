@@ -1,6 +1,9 @@
 package com.tdt.springdemo.model;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -9,7 +12,9 @@ public class User {
     @GeneratedValue
     protected long id;
     @Column(unique = true)
+    @Email
     protected String email;
+    @Size(min = 6)
     protected String password;
     @ManyToOne
     @JoinColumn(name = "store_id")

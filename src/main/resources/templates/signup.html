@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Login page</title>
+    <title>Signup page</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/resources/css/signin.css}"/>
 </head>
 <body>
 
-<p th:if="${loginError}">Wrong user or password</p>
-
 <div class="container" ng-controller="loginCtrl">
-    <form class="form-signin" th:action="@{/auth}" method="post">
+    <form class="form-signin" th:action="@{/signup}" method="post">
         <label for="username">Email</label>:
         <input class="form-control" type="text" id="username" name="username"/> <br/>
+        <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error></label>
         <label for="password">Password</label>:
         <input class="form-control" type="password" id="password" name="password"/> <br/>
+        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error></label>
+        <label for="cf_password">Confirm Password</label>:
+        <input class="form-control" type="password" id="cf_password" name="repassword"/> <br/>
+        <label for="cf_password">${pwd_error}</label>:
         <input class="btn-lg btn-primary btn-block" type="submit" value="Log in"/>
-        <a href="signup">Don't have an account?</a>
-        <br><a href="forgot">Forgot your password?</a></br>
+        <br><a href="profile">Back to home</a></br>
     </form>
 </div>
 </body>
