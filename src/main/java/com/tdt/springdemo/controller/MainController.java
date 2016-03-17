@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,36 +42,40 @@ public class MainController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signup() {
+    public String signup(Model model) {
+
+        model.addAttribute("user", new User());
         return "signup";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
-    public String signup(Model model, @Valid @RequestParam String username,
-                         @Valid @RequestParam String password,
-                         @Valid @RequestParam String repassword,
-                         BindingResult bindingResult) {
+    public String signup(@ModelAttribute @Valid User user,
+                         BindingResult bindingResult,
+                         @RequestParam(required = false) String repassword,
+                         Model model) {
 
         if (bindingResult.hasErrors()) {
             return "signup";
         }
-        if (!password.equals(repassword)) {
+        if (!user.getPassword().equals(repassword)) {
 
-            model.addAttribute("pwd_error", "Password not match!");
+            model.addAttribute("error", "Password not match!");
+            return "signup";
+        }
+        if (userDAO.findByEmail(user.getEmail()) != null) {
+            model.addAttribute("error", "User existed!");
             return "signup";
         } else {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String hashedPassword = passwordEncoder.encode(password);
-            User user = new User();
-            user.setEmail(username);
+            String hashedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(hashedPassword);
             userDAO.save(user);
         }
-        return "signup";
+        return "login";
     }
 
     @RequestMapping(value = "/forgot", method = RequestMethod.GET)
-    public String forgot() {
+    public String forgot(Model model) {
         return "forgot";
     }
 

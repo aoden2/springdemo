@@ -7,19 +7,21 @@
 </head>
 <body>
 
-<div class="container" ng-controller="loginCtrl">
-    <form class="form-signin" th:action="@{/signup}" method="post">
-        <label for="username">Email</label>:
-        <input class="form-control" type="text" id="username" name="username"/> <br/>
-        <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error></label>
-        <label for="password">Password</label>:
-        <input class="form-control" type="password" id="password" name="password"/> <br/>
-        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error></label>
-        <label for="cf_password">Confirm Password</label>:
-        <input class="form-control" type="password" id="cf_password" name="repassword"/> <br/>
-        <label for="cf_password">${pwd_error}</label>:
-        <input class="btn-lg btn-primary btn-block" type="submit" value="Log in"/>
-        <br><a href="profile">Back to home</a></br>
+<div class="container">
+    <form th:object="${user}" class="form-signin" th:action="@{/signup}" method="post">
+        <label for="username">Email:</label>
+        <input class="form-control" type="text" id="username" th:field="*{email}"/>
+        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label><br/>
+
+        <label for="password">Password:</label>
+        <input class="form-control" type="password" id="password" th:field="*{password}"/>
+        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label><br/>
+
+        <label for="cf_password">Confirm Password:</label>
+        <input class="form-control" type="password" id="cf_password" name="repassword"/><br/>
+        <span for="cf_password" th:text="${error}"></span><br/>
+        <input class="btn-lg btn-primary btn-block" type="submit" value="Sign up"/><br/>
+        <a href="profile">Back to home</a>
     </form>
 </div>
 </body>

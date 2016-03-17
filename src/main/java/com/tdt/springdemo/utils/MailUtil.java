@@ -36,6 +36,21 @@ public class MailUtil {
         config.setProperty("mail.smtp.socketFactory.fallback", "false");
     }
 
+    public static String getEmail() {
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        MailUtil.email = email;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        MailUtil.password = password;
+    }
 
     public static Session getSession() {
         Authenticator authenticator = new Authenticator() {

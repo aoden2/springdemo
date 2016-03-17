@@ -1,6 +1,7 @@
 package com.tdt.springdemo.model;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -13,8 +14,9 @@ public class User {
     protected long id;
     @Column(unique = true)
     @Email
+    @NotBlank
     protected String email;
-    @Size(min = 6)
+    @Size(min = 6, max = 100)
     protected String password;
     @ManyToOne
     @JoinColumn(name = "store_id")
